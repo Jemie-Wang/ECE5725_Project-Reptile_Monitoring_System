@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Reptile monitor system</title>
+    <link rel="stylesheet" href='../static/style.css'/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    <style>
+		body {
+			text-align: center;
+		}
+
+		#g1,
+		#g2 {
+			width: 200px;
+			height: 160px;
+			display: inline-block;
+			margin: 1em;
+		}
+
+    </style>
+</head>
+
+<body>
+	<h1>Reptile monitor system</h1>
+    <div id="g1"></div>
+    <div id="g2"></div>
+    <hr>
+	<h3> Last Sensors Reading: {{ time1 }} ==> <a href="/"class="button">REFRESH</a></h3>	
+	<hr>
+	<h3> HISTORICAL DATA </h3>
+		<p> Enter range of time to be retrieved in minutes (Sample Frequency: 10 sencond)
+		<form method="POST">
+			<input name="rangeTime" value= {{rangeTime}}>
+			<input type="submit">
+		</form></p>
+		<hr>
+		<img src="/plot/temp" alt="Image Placeholder" width="40%">
+		<img src="/plot/hum" alt="Image Placeholder" width="40%"><br>
+		<img src="/plot/move" alt="Image Placeholder" width="40%">
+	<h3>Image of last abnormal situation</h3>
+	<div id="Pic">
+		<img src="../static/photo/output.jpg">
+	</div>
+	
+	<!--<h3> Video Streaming </h3>	
+	<div id="camera">
+            <img id="camera_feed" src="/stream_feed">
+        </div>-->
+	
+	
+	<p> @2021 Developed by Jingyi Wang and Nuo Tan</p>
+    
+    <script src="../static/raphael-2.1.4.min.js"></script>
+    <script src="../static/justgage.js"></script>
+    <script>
+		var g1, g2;
+		document.addEventListener("DOMContentLoaded", function(event) {
+			g1 = new JustGage({
+				id: "g1",
+				value: {{temp}},
+				valueFontColor: "black",
+				titleFontColor: "grey",
+				min: -10,
+				max: 50,
+				title: "Temperature",
+				label: "Celcius"
+			});
+
+			g2 = new JustGage({
+				id: "g2",
+				value: {{hum}},
+				valueFontColor: "black",
+				titleFontColor: "grey",
+				min: 0,
+				max: 100,
+				title: "Humidity",
+				label: "%"
+			});
+
+		});
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
